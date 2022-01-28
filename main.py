@@ -2,7 +2,7 @@ import sys
 import os
 import matplotlib.pyplot as plt
 import numpy as np
-
+import statistics
 
 class Pessoa:
     def __init__(self, nome, idade, genero):
@@ -121,6 +121,8 @@ def graficoIdade():
     nums = np.arange(0, 30)
     for i in nums:
         quants.append(idades.count(i))
+    print(f"Média idade: {round(statistics.mean(idades),2)}")
+    print(f"Mediana idade: {round(statistics.median(idades),2)} ")
     plt.plot(nums, quants)
     plt.title("Idades:")
     plt.ylabel('Quantidade')
