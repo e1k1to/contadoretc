@@ -1,6 +1,7 @@
 import sys
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 class Pessoa:
     def __init__(self, nome, idade, genero):
@@ -100,22 +101,59 @@ def escolherGrafico():
 
 # Mostra gráfico de idade '-'
 def graficoIdade():
-    pass
+    idades = []
+    quants = []
+    for pessoa in listaPessoas:
+        idades.append(int(pessoa.idade))
+    idades.sort()
+    nums = np.arange(0,30)
+    for i in nums:
+        quants.append(idades.count(i))
+    plt.plot(nums,quants)
+    plt.title("Idades:")
+    plt.ylabel('Quantidade')
+    plt.xlabel('Idade')
+    plt.show()
+    plt.clf()
 
 # Mostra gráfico de nomes '-'
 def graficoNome():
-    pass
+    nomes = []
+    quant = []
+    for pessoa in listaPessoas:
+        nomes.append(pessoa.nome)
+    nomes.sort(reverse=True)
+    for nome in nomes:
+        quant.append(nomes.count(nome))
+    plt.plot(nomes,quant)
+    plt.title("Nomes:")
+    plt.ylabel("Quantidade")
+    plt.xlabel("Nome")
+    plt.show()
+    plt.clf()
 
 # Mostra gráfico de gêneros '-'
 def graficoGenero():
-    pass
+    generos = []
+    quant = []
+    for pessoa in listaPessoas:
+        generos.append(pessoa.genero)
+    generos.sort(reverse=True)
+    for genero in generos:
+        quant.append(generos.count(genero))
+    plt.plot(generos, quant)
+    plt.title("Gêneros:")
+    plt.ylabel("Quantidade")
+    plt.xlabel("Gênero")
+    plt.show()
+    plt.clf()
 
 def usage():
     print("""Comandos:
 a - Ativar modo de adição de pessoas.
+c - Mostrar quantidade de pessoas cadastradas.
 g - Mostrar gráfico.
 q - Sair do programa.
-c - Mostrar quantidade de pessoas cadastradas.
 """)
 
 def menu():
