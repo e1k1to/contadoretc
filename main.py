@@ -3,13 +3,16 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 class Pessoa:
     def __init__(self, nome, idade, genero):
         self.nome = nome
         self.idade = idade
         self.genero = genero
 
+
 listaPessoas = []
+
 
 # Recebe input e apenas retorna esse se for um int
 def intValido(req):
@@ -18,6 +21,7 @@ def intValido(req):
             return int(input(req))
         except:
             print("Digite um inteiro válido.")
+
 
 # Recebe input para fazer uma decisão S/n
 def decisaoValida(pergunta):
@@ -30,8 +34,10 @@ def decisaoValida(pergunta):
         else:
             print("Escolha inválida.\n")
 
-def adicionarPessoa(nome,idade,genero):
+
+def adicionarPessoa(nome, idade, genero):
     listaPessoas.append(Pessoa(nome, idade, genero))
+
 
 # Recebe inputs de nome, idade, genero, e cria uma Pessoa com essas informações
 def adicionarPessoas():
@@ -44,10 +50,11 @@ def adicionarPessoas():
         print(f"Nome: {nome}, Idade: {idade}, Gênero: {genero}")
         confirmar = decisaoValida('Essas informações estão corretas? (S/n)\n')
         if confirmar:
-            adicionarPessoa(nome,idade,genero)
+            adicionarPessoa(nome, idade, genero)
             print("Pessoa adicionada.")
         else:
             print("Pessoa NÃO foi adicionada.")
+
 
 # Transforma lista de pessoas em string "nome:idade:genero"
 def listaParaArquivo():
@@ -57,31 +64,35 @@ def listaParaArquivo():
         todasPessoas.append(stringPessoa)
     return todasPessoas
 
+
 # Lê informações no arquivo "dados.txt" e adiciona na lista "listaPessoas"
 def lerDados():
     try:
-        with open("dados.txt","r") as data:
+        with open("dados.txt", "r") as data:
             for pessoa in data:
                 if pessoa != '\n':
                     dadosPessoa = pessoa.split(':')
                     nome, idade, genero = dadosPessoa
-                    adicionarPessoa(nome,idade,genero)
+                    adicionarPessoa(nome, idade, genero)
                 else:
                     pass
     except FileNotFoundError:
         print("Arquivo 'dados.txt' não encontrado, criando novo arquivo 'dados.txt'.")
-        open("dados.txt","x").close()
+        open("dados.txt", "x").close()
+
 
 # Adiciona novas informações ao arquivo "dados.txt"
 def escreverDados():
-    with open("dados.txt","w") as data:
+    with open("dados.txt", "w") as data:
         formatacaoArquivo = listaParaArquivo()
         formatacaoArquivo += '\n'
         data.writelines(formatacaoArquivo)
 
+
 # Limpa a tela
 def clear():
-    os.system('cls' if os.name=='nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 # Escolhe qual gráfico será mostrado
 def escolherGrafico():
@@ -99,6 +110,7 @@ def escolherGrafico():
         else:
             print("Comando inválido.")
 
+
 # Mostra gráfico de idade '-'
 def graficoIdade():
     idades = []
@@ -106,15 +118,16 @@ def graficoIdade():
     for pessoa in listaPessoas:
         idades.append(int(pessoa.idade))
     idades.sort()
-    nums = np.arange(0,30)
+    nums = np.arange(0, 30)
     for i in nums:
         quants.append(idades.count(i))
-    plt.plot(nums,quants)
+    plt.plot(nums, quants)
     plt.title("Idades:")
     plt.ylabel('Quantidade')
     plt.xlabel('Idade')
     plt.show()
     plt.clf()
+
 
 # Mostra gráfico de nomes '-'
 def graficoNome():
@@ -125,12 +138,13 @@ def graficoNome():
     nomes.sort(reverse=True)
     for nome in nomes:
         quant.append(nomes.count(nome))
-    plt.plot(nomes,quant)
+    plt.plot(nomes, quant)
     plt.title("Nomes:")
     plt.ylabel("Quantidade")
     plt.xlabel("Nome")
     plt.show()
     plt.clf()
+
 
 # Mostra gráfico de gêneros '-'
 def graficoGenero():
@@ -148,6 +162,7 @@ def graficoGenero():
     plt.show()
     plt.clf()
 
+
 def usage():
     print("""Comandos:
 a - Ativar modo de adição de pessoas.
@@ -155,6 +170,7 @@ c - Mostrar quantidade de pessoas cadastradas.
 g - Mostrar gráfico.
 q - Sair do programa.
 """)
+
 
 def menu():
     while True:
@@ -180,6 +196,8 @@ def menu():
             escreverDados()
             sys.exit(0)
 # Executar apenas se não for import
+
+
 if __name__ == '__main__':
     clear()
     print("Bem vindo ao programa :), digita ali no console '-'")
