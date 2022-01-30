@@ -46,7 +46,7 @@ def adicionarPessoas():
         if nome.lower() == 'q':
             break
         idade = intValido("Digite a idade da pessoa.\n")
-        genero = input("Digite o gênero da pessoa.\n").capitalize()
+        genero = input("Digite o gênero da pessoa.\n").upper()
         print(f"Nome: {nome}, Idade: {idade}, Gênero: {genero}")
         confirmar = decisaoValida('Essas informações estão corretas? (S/n)\n')
         if confirmar:
@@ -71,6 +71,7 @@ def lerDados():
         with open("dados.txt", "r") as data:
             for pessoa in data:
                 if pessoa != '\n':
+                    pessoa = pessoa.strip()
                     dadosPessoa = pessoa.split(':')
                     nome, idade, genero = dadosPessoa
                     adicionarPessoa(nome, idade, genero)
