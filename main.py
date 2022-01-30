@@ -85,7 +85,6 @@ def lerDados():
 def escreverDados():
     with open("dados.txt", "w") as data:
         formatacaoArquivo = listaParaArquivo()
-        formatacaoArquivo += '\n'
         data.writelines(formatacaoArquivo)
 
 
