@@ -60,7 +60,7 @@ def adicionarPessoas():
 def listaParaArquivo():
     todasPessoas = []
     for pessoa in listaPessoas:
-        stringPessoa = f"{pessoa.nome}:{pessoa.idade}:{pessoa.genero}"
+        stringPessoa = f"{pessoa.nome}:{pessoa.idade}:{pessoa.genero}\n"
         todasPessoas.append(stringPessoa)
     return todasPessoas
 
